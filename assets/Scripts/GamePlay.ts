@@ -20,7 +20,6 @@ export default class GamePlay extends cc.Component {
         cc.director.getCollisionManager().enabledDebugDraw = true;
         cc.director.getCollisionManager().enabled = true;
         cc.director.getCollisionManager().enabledDrawBoundingBox = true;
-
         this.setTouch();
     }
     setTouch() {
@@ -32,7 +31,7 @@ export default class GamePlay extends cc.Component {
     }
 
     spawnBlock(pos) {
-        let newPos = cc.v2(pos.x, 400);
+        let newPos = cc.v2(pos.x, 500);
         let rdBlock = Utils.randomNum(0, 4);
         let block = cc.instantiate(this.blocksPrefab[rdBlock]);
         block.parent = this.node;
