@@ -1,7 +1,8 @@
 {
   "group-list": [
     "default",
-    "Block"
+    "Block",
+    "Block2"
   ],
   "collision-matrix": [
     [
@@ -9,6 +10,12 @@
       true
     ],
     [
+      true,
+      true,
+      true
+    ],
+    [
+      false,
       true,
       true
     ]
