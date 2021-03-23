@@ -5,14 +5,15 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import Block from "./Block";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class GameManager extends cc.Component {
 
-
+    //
     spawned: boolean = false;
-
     private static _instance: GameManager = null;
     public static get instance() {
         if (this._instance == null) {
@@ -20,15 +21,23 @@ export default class GameManager extends cc.Component {
         }
         return this._instance;
     }
-    public spawnNextBlock(prefab: cc.Prefab, nodeParent: any , parent : any) {
+
+
+    public spawnNextBlock(prefab: cc.Prefab, nodeParent: any, parent: any) {
         if (!this.spawned) {
             let nextBlock = cc.instantiate(prefab);
             nextBlock.parent = parent;
             nextBlock.setPosition(nodeParent);
+            let script = nextBlock.getComponent(Block);
+            script.setData(true);
             this.spawned = true;
             this.scheduleOnce(() => {
                 this.spawned = false;
-            },1);
+            }, 0.0001);
         }
+    }
+
+    public callSpawnBlock() {
+
     }
 }
