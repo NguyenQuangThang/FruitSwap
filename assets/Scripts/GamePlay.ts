@@ -17,10 +17,6 @@ export default class GamePlay extends cc.Component {
     blocksPrefab: cc.Prefab[] = [];
     nodeCurrent: cc.Node = null;
     onLoad() {
-        cc.director.getPhysicsManager().enabled = true;
-        // cc.director.getCollisionManager().enabledDebugDraw = true;
-        cc.director.getCollisionManager().enabled = true;
-        // cc.director.getCollisionManager().enabledDrawBoundingBox = true;
         this.setTouch();
     }
 
