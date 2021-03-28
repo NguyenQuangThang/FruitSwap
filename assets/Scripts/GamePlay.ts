@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import Block from "./Block";
+import GameManager from "./GameManager";
 import Utils from "./Utils/Utils";
 
 const { ccclass, property } = cc._decorator;
@@ -15,12 +16,16 @@ export default class GamePlay extends cc.Component {
 
     @property(cc.Prefab)
     blocksPrefab: cc.Prefab[] = [];
+    @property(cc.Label)
+    scoreLabel: cc.Label;
     nodeCurrent: cc.Node = null;
     onLoad() {
+        GameManager.instance.score = 0;
         this.setTouch();
     }
 
     start() {
+        GameManager.instance.gamePlay = this;
         this.spawnBlock(cc.v2(0, 400));
     }
 
@@ -45,7 +50,7 @@ export default class GamePlay extends cc.Component {
             this.spawnBlock(cc.v2(0, 400));
         }, 1);
     }
-    
+
     spawnBlock(pos) {
         let newPos = cc.v2(pos.x, 400);
         let rdBlock = Utils.randomNum(0, 5);
@@ -54,5 +59,9 @@ export default class GamePlay extends cc.Component {
         this.nodeCurrent.setPosition(newPos);
         let script = this.nodeCurrent.getComponent(Block);
         script.setData(false, false);
+    }
+
+    updateScoreUI() {
+        this.scoreLabel.string = GameManager.instance.score.toString();
     }
 }

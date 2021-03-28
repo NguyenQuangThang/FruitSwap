@@ -25,6 +25,8 @@ export default class Block extends cc.Component {
     @property(cc.AudioClip)
     chamdatAudio: cc.AudioClip;
     audioChamDat: boolean = false;
+    @property(Number)
+    point: number = 0;
     onLoad() {
         this.node.scale = 0.1;
     }
@@ -64,8 +66,10 @@ export default class Block extends cc.Component {
             var moveTo = cc.moveTo(0.2, self.node.position);
             other.node.runAction(moveTo);
             this.scheduleOnce(() => {
-                other.node.destroy();
-                self.node.destroy();
+                if (other.node != null)
+                    other.node.destroy();
+                if (self.node != null)
+                    self.node.destroy();
                 cc.audioEngine.playEffect(this.breakAudio, false);
                 GameManager.instance.spawnNextBlock(this.nextBlockPre, self.node.position, this.node.parent);
 
