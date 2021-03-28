@@ -48,8 +48,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 100
+      "width": 125,
+      "height": 125
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -67,8 +67,8 @@
         0,
         0,
         1,
-        1.2,
-        1.2,
+        1,
+        1,
         1
       ]
     },
@@ -128,6 +128,15 @@
     "nextBlockPre": {
       "__uuid__": "0a13fa79-c87e-4f34-8356-1a6a118689f2"
     },
+    "fx": {
+      "__uuid__": "947f9460-6259-4646-8ca0-e5f98dbc93dc"
+    },
+    "breakAudio": {
+      "__uuid__": "3b12f0a6-f894-4461-9f2a-53576adf71b4"
+    },
+    "chamdatAudio": {
+      "__uuid__": "85e2cfbc-7f4e-42f2-a2f9-75f64cbb4392"
+    },
     "_id": ""
   },
   {
@@ -148,7 +157,7 @@
       "x": 0,
       "y": 0
     },
-    "_angularVelocity": 0,
+    "_angularVelocity": 90,
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
@@ -166,15 +175,15 @@
     "tag": 0,
     "_density": 1,
     "_sensor": false,
-    "_friction": 1,
-    "_restitution": 0.2,
+    "_friction": 0.2,
+    "_restitution": 0,
     "body": null,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
-    "_radius": 50,
+    "_radius": 63,
     "_id": ""
   },
   {
@@ -191,7 +200,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 50,
+    "_radius": 63,
     "_id": ""
   },
   {

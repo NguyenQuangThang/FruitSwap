@@ -13,7 +13,7 @@ const { ccclass, property } = cc._decorator;
 export default class GameManager extends cc.Component {
 
     //
-    spawned: boolean = false;
+    // spawned: boolean = false;
     private static _instance: GameManager = null;
     public static get instance() {
         if (this._instance == null) {
@@ -24,20 +24,15 @@ export default class GameManager extends cc.Component {
 
 
     public spawnNextBlock(prefab: cc.Prefab, nodeParent: any, parent: any) {
-        if (!this.spawned) {
+        // if (!this.spawned) {
             let nextBlock = cc.instantiate(prefab);
             nextBlock.parent = parent;
             nextBlock.setPosition(nodeParent);
             let script = nextBlock.getComponent(Block);
-            script.setData(true);
-            this.spawned = true;
-            this.scheduleOnce(() => {
-                this.spawned = false;
-            }, 0.0001);
+            script.setData(true, true);
         }
     }
 
-    public callSpawnBlock() {
+    // public callSpawnBlock() {
 
-    }
-}
+    // }

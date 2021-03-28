@@ -21,7 +21,7 @@ export default class GamePlay extends cc.Component {
     }
 
     start() {
-        this.spawnBlock(cc.v2(0, 500));
+        this.spawnBlock(cc.v2(0, 400));
     }
 
     setTouch() {
@@ -33,7 +33,7 @@ export default class GamePlay extends cc.Component {
             let pos_touch = event.getLocation();
             pos_touch = this.node.convertToNodeSpaceAR(pos_touch);
             this.rigidbody = this.nodeCurrent.getComponent(cc.RigidBody);
-            this.nodeCurrent.setPosition(cc.v2(pos_touch.x, 500));
+            this.nodeCurrent.setPosition(cc.v2(pos_touch.x, 400));
             this.rigidbody.type = cc.RigidBodyType.Dynamic;
             this.nodeCurrent = null;
             this.nextSpawn()
@@ -42,18 +42,17 @@ export default class GamePlay extends cc.Component {
 
     nextSpawn() {
         this.scheduleOnce(() => {
-            this.spawnBlock(cc.v2(0, 500));
+            this.spawnBlock(cc.v2(0, 400));
         }, 1);
     }
+    
     spawnBlock(pos) {
-        let newPos = cc.v2(pos.x, 500);
-        let rdBlock = Utils.randomNum(0, 4);
+        let newPos = cc.v2(pos.x, 400);
+        let rdBlock = Utils.randomNum(0, 5);
         this.nodeCurrent = cc.instantiate(this.blocksPrefab[rdBlock]);
         this.nodeCurrent.parent = this.node;
         this.nodeCurrent.setPosition(newPos);
         let script = this.nodeCurrent.getComponent(Block);
-        script.setData(false);
+        script.setData(false, false);
     }
-
-
 }
