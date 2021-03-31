@@ -50,34 +50,40 @@ export default class Block extends cc.Component {
             this.audioChamDat = true;
             cc.audioEngine.playEffect(this.chamdatAudio, false);
         }
-        if (this.firstEnter) {
-            return;
+
+        if (other.name == self.name) {
+            if (other.node.position.y >= self.node.position.y) {
+                let block = other.node.getComponent(Block);
+                if (block == undefined || block == null)
+                    return;
+                if (block.firstEnter)
+                    return;
+                if (!block.firstEnter) {
+                    other.node.getComponent(cc.PhysicsCircleCollider).active = false;
+                    other.node.getComponent(cc.RigidBody).active = false;
+                    other.node.getComponent(cc.CircleCollider).active = false;
+                    var moveTo = cc.moveTo(0.2, self.node.position);
+                    other.node.runAction(moveTo);
+                    this.scheduleOnce(() => {
+                        if (other.node != null)
+                            other.node.destroy();
+                        if (self.node != null)
+                            self.node.destroy();
+                        cc.audioEngine.playEffect(this.breakAudio, false);
+                        GameManager.instance.spawnNextBlock(this.nextBlockPre, self.node.position, this.node.parent);
+
+                        let _fx = cc.instantiate(this.fx);
+                        _fx.parent = this.node.parent;
+                        _fx.setPosition(self.node.position);
+                    }, 0.2);
+                }
+                block.setFirstEnter();
+            }
         }
 
-        if (other.name == self.name && other.node.position.y >= self.node.position.y) {
-            console.log("other.name: " + other.name);
-            this.firstEnter = true;
-            if (this.nextBlockPre == null)
-                return;
-            other.node.getComponent(cc.PhysicsCircleCollider).active = false;
-            other.node.getComponent(cc.RigidBody).active = false;
-            other.node.getComponent(cc.CircleCollider).active = false;
+    }
+    setFirstEnter() {
 
-            var moveTo = cc.moveTo(0.2, self.node.position);
-            other.node.runAction(moveTo);
-            this.scheduleOnce(() => {
-                if (other.node != null)
-                    other.node.destroy();
-                if (self.node != null)
-                    self.node.destroy();
-                cc.audioEngine.playEffect(this.breakAudio, false);
-                GameManager.instance.spawnNextBlock(this.nextBlockPre, self.node.position, this.node.parent);
-
-                let _fx = cc.instantiate(this.fx);
-                _fx.parent = this.node.parent;
-                _fx.setPosition(self.node.position);
-            }, 0.2)
-        }
-
+        this.firstEnter = true;
     }
 }

@@ -53,7 +53,9 @@ export default class GamePlay extends cc.Component {
 
     spawnBlock(pos) {
         let newPos = cc.v2(pos.x, 400);
-        let rdBlock = Utils.randomNum(0, 5);
+        // let rdBlock = Utils.randomNum(0, 5);
+        let rdBlock =3;
+
         this.nodeCurrent = cc.instantiate(this.blocksPrefab[rdBlock]);
         this.nodeCurrent.parent = this.node;
         this.nodeCurrent.setPosition(newPos);

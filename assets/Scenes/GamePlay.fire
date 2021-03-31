@@ -2177,8 +2177,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 400,
-      "height": 400
+      "width": 350,
+      "height": 350
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -2310,7 +2310,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 200,
+    "_radius": 150,
     "_id": "ed8puwWzhBz74F8GCQlaJC"
   },
   {
@@ -2327,7 +2327,7 @@
       "x": 0,
       "y": 0
     },
-    "_radius": 200,
+    "_radius": 150,
     "_id": "cb2eZsFM1PaqOk8/xj/3r/"
   },
   {
