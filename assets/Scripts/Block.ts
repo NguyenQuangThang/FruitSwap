@@ -27,6 +27,7 @@ export default class Block extends cc.Component {
     audioChamDat: boolean = false;
     @property(Number)
     point: number = 0;
+    isFallenCheck : boolean = false;
     onLoad() {
         this.node.scale = 0.1;
     }
@@ -34,7 +35,9 @@ export default class Block extends cc.Component {
         var scale = cc.scaleTo(0.3, 1);
         this.node.runAction(scale);
     }
+
     setData(isFallen: boolean = false, audio: boolean) {
+        this.isFallenCheck = isFallen;
         this.audioChamDat = audio;
         this.rigidbody = this.node.getComponent(cc.RigidBody);
         if (!isFallen)
@@ -52,7 +55,7 @@ export default class Block extends cc.Component {
         }
 
         if (other.name == self.name) {
-            if (other.node.position.y >= self.node.position.y) {
+            if (other.node.position.y > self.node.position.y) {
                 let block = other.node.getComponent(Block);
                 if (block == undefined || block == null)
                     return;

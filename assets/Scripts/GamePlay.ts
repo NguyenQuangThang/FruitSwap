@@ -16,6 +16,13 @@ export default class GamePlay extends cc.Component {
 
     @property(cc.Prefab)
     blocksPrefab: cc.Prefab[] = [];
+    @property(cc.Node)
+    blockParent: cc.Node;
+    @property(cc.Node)
+    gameOverPopup: cc.Node;
+    @property(cc.Node)
+    warning: cc.Node;
+    blocksActived: Block[] = new Array();
     @property(cc.Label)
     scoreLabel: cc.Label;
     nodeCurrent: cc.Node = null;
@@ -48,16 +55,15 @@ export default class GamePlay extends cc.Component {
     nextSpawn() {
         this.scheduleOnce(() => {
             this.spawnBlock(cc.v2(0, 400));
+            GameManager.instance.checkWarning();
         }, 1);
     }
 
     spawnBlock(pos) {
         let newPos = cc.v2(pos.x, 400);
-        // let rdBlock = Utils.randomNum(0, 5);
-        let rdBlock =3;
-
+        let rdBlock = GameManager.instance.randomPercent();
         this.nodeCurrent = cc.instantiate(this.blocksPrefab[rdBlock]);
-        this.nodeCurrent.parent = this.node;
+        this.nodeCurrent.parent = this.blockParent;
         this.nodeCurrent.setPosition(newPos);
         let script = this.nodeCurrent.getComponent(Block);
         script.setData(false, false);
@@ -65,5 +71,30 @@ export default class GamePlay extends cc.Component {
 
     updateScoreUI() {
         this.scoreLabel.string = GameManager.instance.score.toString();
+    }
+
+    count = 0;
+    checkWarning() {
+        this.count = 0;
+        this.blocksActived.pop;
+        this.blocksActived = this.blockParent.getComponentsInChildren(Block);
+        this.blocksActived.forEach(element => {
+            if (element.node.position.y > 200 && element.isFallenCheck) {
+                this.count += 1;
+                console.log(this.count);
+
+                if (this.count >= 1) {
+                    this.warning.active = true;
+                }
+                else
+                    this.warning.active = false;
+                if (element.node.position.y > 350) {
+
+                }
+            }
+        });
+        if (this.count == 0)
+            this.warning.active = false;
+
     }
 }
