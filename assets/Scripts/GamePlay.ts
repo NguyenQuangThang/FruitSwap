@@ -79,7 +79,7 @@ export default class GamePlay extends cc.Component {
         this.blocksActived.pop;
         this.blocksActived = this.blockParent.getComponentsInChildren(Block);
         this.blocksActived.forEach(element => {
-            if (element.node.position.y > 200 && element.isFallenCheck) {
+            if (element.node.position.y > 190 && element.isFallenCheck) {
                 this.count += 1;
                 console.log(this.count);
 
@@ -88,13 +88,18 @@ export default class GamePlay extends cc.Component {
                 }
                 else
                     this.warning.active = false;
-                if (element.node.position.y > 350) {
-
+                if (element.node.position.y > 300) {
+                    this.gameOverPopup.active = true;
                 }
             }
         });
         if (this.count == 0)
             this.warning.active = false;
 
+    }
+
+    restart()
+    {
+        cc.director.loadScene("GamePlay");
     }
 }

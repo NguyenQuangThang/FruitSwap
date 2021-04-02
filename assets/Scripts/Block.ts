@@ -27,7 +27,7 @@ export default class Block extends cc.Component {
     audioChamDat: boolean = false;
     @property(Number)
     point: number = 0;
-    isFallenCheck : boolean = false;
+    isFallenCheck: boolean = false;
     onLoad() {
         this.node.scale = 0.1;
     }
@@ -62,9 +62,9 @@ export default class Block extends cc.Component {
                 if (block.firstEnter)
                     return;
                 if (!block.firstEnter) {
-                    other.node.getComponent(cc.PhysicsCircleCollider).active = false;
+                    // other.node.getComponent(cc.PhysicsCircleCollider).active = false;
                     other.node.getComponent(cc.RigidBody).active = false;
-                    other.node.getComponent(cc.CircleCollider).active = false;
+                    // other.node.getComponent(cc.CircleCollider).active = false;
                     var moveTo = cc.moveTo(0.2, self.node.position);
                     other.node.runAction(moveTo);
                     this.scheduleOnce(() => {
@@ -82,11 +82,18 @@ export default class Block extends cc.Component {
                 }
                 block.setFirstEnter();
             }
+            if (this.node != null) {
+                this.scheduleOnce(() => {
+                    this.resetCollider();
+                },1);
+            }
         }
 
     }
+    resetCollider() {
+        this.node.getComponent(cc.RigidBody).active = true;
+    }
     setFirstEnter() {
-
         this.firstEnter = true;
     }
 }
