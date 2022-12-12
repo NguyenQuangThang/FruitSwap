@@ -1,6 +1,6 @@
 {
-  "platform": "fb-instant-games",
-  "actualPlatform": "fb-instant-games",
+  "platform": "web-mobile",
+  "actualPlatform": "web-mobile",
   "template": "link",
   "buildPath": "./build",
   "debug": false,
